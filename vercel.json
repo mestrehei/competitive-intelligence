@@ -1,17 +1,9 @@
-
-
-Publishable key
-sb_publishable_aTdNTYIZDOK7Iprsh_UOyw_PqHOUEjW
-
-Secret keys
-sb_secret_O_p1t0uwzPHmOPjwlJuWlg_rqEPX4Lv
-
-
-
-Data API
-https://diqyzhdoecnbditazziq.supabase.co/rest/v1/\
-
-
-
-
-https://diqyzhdoecnbditazziq.supabase.co
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    }
+  ]
+}
