@@ -2453,17 +2453,25 @@
     <script>
         // ============================================================================
         // SUPABASE CONFIGURATION
-        // IMPORTANTE: Substitua com suas credenciais reais do Supabase
         // ============================================================================
         
-        const SUPABASE_URL = 'https://diqyzhdoecnbditazziq.supabase.co'; // Ex: https://xxxxx.supabase.co
-        const SUPABASE_ANON_KEY = 'sb_secret_O_p1t0uwzPHmOPjwlJuWlg_rqEPX4Lv'; // Ex: eyJhbGci...
+        const SUPABASE_URL = 'https://diqyzhdoecnbditazziq.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_aTdNTYIZDOK7Iprsh_UOyw_PqHOUEjW';
         
         // Initialize Supabase Client
-        const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-        
-        // Current authenticated user
+        let supabase = null;
         let currentUser = null;
+        
+        if (window.supabase && SUPABASE_ANON_KEY !== 'COLE_SUA_CHAVE_PUBLISHABLE_COMPLETA_AQUI') {
+            try {
+                supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                console.log('✅ Supabase configurado');
+            } catch (error) {
+                console.warn('⚠️ Erro ao configurar Supabase:', error);
+            }
+        } else {
+            console.warn('⚠️ Supabase não configurado - usando modo offline');
+        }
         
         // ============================================================================
         // AUTHENTICATION FUNCTIONS
