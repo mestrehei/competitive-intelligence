@@ -2459,19 +2459,27 @@
         const SUPABASE_ANON_KEY = 'sb_publishable_aTdNTYIZDOK7Iprsh_UOyw_PqHOUEjW';
         
         // Initialize Supabase Client
-        let supabase = null;
-        let currentUser = null;
-        
-        if (window.supabase && SUPABASE_ANON_KEY !== 'COLE_SUA_CHAVE_PUBLISHABLE_COMPLETA_AQUI') {
-            try {
-                supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                console.log('✅ Supabase configurado');
-            } catch (error) {
-                console.warn('⚠️ Erro ao configurar Supabase:', error);
-            }
-        } else {
-            console.warn('⚠️ Supabase não configurado - usando modo offline');
-        }
+       // Supabase globals
+window.supabase_client = null;
+window.currentUser = null;
+
+// Initialize on DOMContentLoaded
+(function() {
+    if (typeof window.supabase === 'undefined') {
+        console.warn('⚠️ Supabase library not loaded');
+        return;
+    }
+    
+    try {
+        window.supabase_client = window.supabase.createClient(
+            'https://diqyzhdoecnbditazziq.supabase.co',
+            'sb_publishable_aTdNTYIZDOK7Iprsh_UOyw_PqHOUEjW'
+        );
+        console.log('✅ Supabase initialized');
+    } catch (error) {
+        console.error('❌ Supabase error:', error);
+    }
+})();
         
         // ============================================================================
         // AUTHENTICATION FUNCTIONS
