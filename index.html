@@ -1555,10 +1555,10 @@
         }
     </style>
     
-    <!-- Supabase Client Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- Supabase Client Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- window.supabase_client Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@window.supabase_client/window.supabase_client-js@2"></script>
+    <!-- window.supabase_client Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@window.supabase_client/window.supabase_client-js@2"></script>
 </head>
 <body>
     <!-- Login Screen -->
@@ -2452,32 +2452,32 @@
 
     <script>
         // ============================================================================
-        // SUPABASE CONFIGURATION
+        // window.supabase_client CONFIGURATION
         // ============================================================================
         
-        const SUPABASE_URL = 'https://diqyzhdoecnbditazziq.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_aTdNTYIZDOK7Iprsh_UOyw_PqHOUEjW';
+        const window.supabase_client_URL = 'https://diqyzhdoecnbditazziq.window.supabase_client.co';
+        const window.supabase_client_ANON_KEY = 'sb_publishable_aTdNTYIZDOK7Iprsh_UOyw_PqHOUEjW';
         
-        // Initialize Supabase Client
-       // Supabase globals
-window.supabase_client = null;
+        // Initialize window.supabase_client Client
+       // window.supabase_client globals
+window.window.supabase_client_client = null;
 window.currentUser = null;
 
 // Initialize on DOMContentLoaded
 (function() {
-    if (typeof window.supabase === 'undefined') {
-        console.warn('⚠️ Supabase library not loaded');
+    if (typeof window.window.supabase_client === 'undefined') {
+        console.warn('⚠️ window.supabase_client library not loaded');
         return;
     }
     
     try {
-        window.supabase_client = window.supabase.createClient(
-            'https://diqyzhdoecnbditazziq.supabase.co',
+        window.window.supabase_client_client = window.window.supabase_client.createClient(
+            'https://diqyzhdoecnbditazziq.window.supabase_client.co',
             'sb_publishable_aTdNTYIZDOK7Iprsh_UOyw_PqHOUEjW'
         );
-        console.log('✅ Supabase initialized');
+        console.log('✅ window.supabase_client initialized');
     } catch (error) {
-        console.error('❌ Supabase error:', error);
+        console.error('❌ window.supabase_client error:', error);
     }
 })();
         
@@ -2486,13 +2486,13 @@ window.currentUser = null;
         // ============================================================================
         
         async function checkAuth() {
-            if (!supabase) {
-                console.warn('⚠️ Supabase not configured - running in offline mode');
+            if (!window.supabase_client) {
+                console.warn('⚠️ window.supabase_client not configured - running in offline mode');
                 showApp();
                 return false;
             }
             
-            const { data: { session } } = await supabase.auth.getSession();
+            const { data: { session } } = await window.supabase_client.auth.getSession();
             
             if (!session) {
                 showLoginScreen();
@@ -2501,20 +2501,20 @@ window.currentUser = null;
                 currentUser = session.user;
                 console.log('✅ User authenticated:', currentUser.email);
                 showApp();
-                await loadDataFromSupabase();
+                await loadDataFromwindow.supabase_client();
                 setupRealtimeListeners();
                 return true;
             }
         }
         
         async function login(email, password) {
-            if (!supabase) {
-                alert('Supabase não configurado. Verifique as credenciais.');
+            if (!window.supabase_client) {
+                alert('window.supabase_client não configurado. Verifique as credenciais.');
                 return false;
             }
             
             try {
-                const { data, error } = await supabase.auth.signInWithPassword({
+                const { data, error } = await window.supabase_client.auth.signInWithPassword({
                     email,
                     password
                 });
@@ -2524,7 +2524,7 @@ window.currentUser = null;
                 currentUser = data.user;
                 console.log('✅ Login successful:', currentUser.email);
                 showApp();
-                await loadDataFromSupabase();
+                await loadDataFromwindow.supabase_client();
                 setupRealtimeListeners();
                 return true;
             } catch (error) {
@@ -2535,8 +2535,8 @@ window.currentUser = null;
         }
         
         async function logout() {
-            if (supabase) {
-                await supabase.auth.signOut();
+            if (window.supabase_client) {
+                await window.supabase_client.auth.signOut();
             }
             currentUser = null;
             localStorage.clear();
@@ -2588,14 +2588,14 @@ window.currentUser = null;
         // DATA SYNCHRONIZATION
         // ============================================================================
         
-        async function loadDataFromSupabase() {
-            if (!supabase || !currentUser) return;
+        async function loadDataFromwindow.supabase_client() {
+            if (!window.supabase_client || !currentUser) return;
             
             try {
-                console.log('🔄 Loading data from Supabase...');
+                console.log('🔄 Loading data from window.supabase_client...');
                 
                 // Load Excel Database (most recent)
-                const { data: databases, error: dbError } = await supabase
+                const { data: databases, error: dbError } = await window.supabase_client
                     .from('excel_databases')
                     .select('*')
                     .order('import_date', { ascending: false })
@@ -2619,7 +2619,7 @@ window.currentUser = null;
                 }
                 
                 // Load Projects
-                const { data: projects, error: projError } = await supabase
+                const { data: projects, error: projError } = await window.supabase_client
                     .from('projects')
                     .select('*')
                     .order('created_at', { ascending: false });
@@ -2638,24 +2638,24 @@ window.currentUser = null;
                     }
                 }
                 
-                console.log('✅ All data loaded from Supabase');
+                console.log('✅ All data loaded from window.supabase_client');
                 
             } catch (error) {
-                console.error('❌ Error loading data from Supabase:', error);
+                console.error('❌ Error loading data from window.supabase_client:', error);
                 alert('Erro ao carregar dados. Verifique sua conexão.');
             }
         }
         
-        async function saveExcelDatabaseToSupabase(database, filename) {
-            if (!supabase || !currentUser) {
+        async function saveExcelDatabaseTowindow.supabase_client(database, filename) {
+            if (!window.supabase_client || !currentUser) {
                 console.warn('⚠️ User not authenticated, saving locally only');
                 return null;
             }
             
             try {
-                console.log('💾 Saving database to Supabase...');
+                console.log('💾 Saving database to window.supabase_client...');
                 
-                const { data, error } = await supabase
+                const { data, error } = await window.supabase_client
                     .from('excel_databases')
                     .insert({
                         user_id: currentUser.id,
@@ -2668,23 +2668,23 @@ window.currentUser = null;
                 
                 if (error) throw error;
                 
-                console.log('✅ Database saved to Supabase:', data.id);
+                console.log('✅ Database saved to window.supabase_client:', data.id);
                 
                 await logActivity('import', 'excel_database', data.id, { filename });
                 
                 return data;
             } catch (error) {
-                console.error('❌ Error saving database to Supabase:', error);
+                console.error('❌ Error saving database to window.supabase_client:', error);
                 alert('Erro ao salvar no servidor. Dados salvos apenas localmente.');
                 return null;
             }
         }
         
         async function logActivity(action, entityType, entityId, details = {}) {
-            if (!supabase || !currentUser) return;
+            if (!window.supabase_client || !currentUser) return;
             
             try {
-                await supabase
+                await window.supabase_client
                     .from('activity_log')
                     .insert({
                         user_id: currentUser.id,
@@ -2699,26 +2699,26 @@ window.currentUser = null;
         }
         
         function setupRealtimeListeners() {
-            if (!supabase) return;
+            if (!window.supabase_client) return;
             
-            supabase
+            window.supabase_client
                 .channel('excel_databases_changes')
                 .on('postgres_changes', 
                     { event: '*', schema: 'public', table: 'excel_databases' },
                     (payload) => {
                         console.log('🔄 Database updated by another device!', payload);
-                        loadDataFromSupabase();
+                        loadDataFromwindow.supabase_client();
                     }
                 )
                 .subscribe();
             
-            supabase
+            window.supabase_client
                 .channel('projects_changes')
                 .on('postgres_changes',
                     { event: '*', schema: 'public', table: 'projects' },
                     (payload) => {
                         console.log('🔄 Projects updated!', payload);
-                        loadDataFromSupabase();
+                        loadDataFromwindow.supabase_client();
                     }
                 )
                 .subscribe();
@@ -4926,9 +4926,9 @@ window.currentUser = null;
                 // Persist
                 saveToLocalStorage();
                 
-                // Save to Supabase (if authenticated)
-                if (currentUser && supabase) {
-                    await saveExcelDatabaseToSupabase(database, file.name);
+                // Save to window.supabase_client (if authenticated)
+                if (currentUser && window.supabase_client) {
+                    await saveExcelDatabaseTowindow.supabase_client(database, file.name);
                 }
                 
                 // Update UI
@@ -5029,9 +5029,9 @@ window.currentUser = null;
                 // Persist
                 saveToLocalStorage();
                 
-                // Save to Supabase (if authenticated)
-                if (currentUser && supabase) {
-                    await saveExcelDatabaseToSupabase(database, file.name);
+                // Save to window.supabase_client (if authenticated)
+                if (currentUser && window.supabase_client) {
+                    await saveExcelDatabaseTowindow.supabase_client(database, file.name);
                 }
                 
                 updateImportProgress(100, 'Concluído!');
